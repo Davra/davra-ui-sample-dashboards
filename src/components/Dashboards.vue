@@ -1,5 +1,8 @@
+<script setup lang="ts">
+import { DashboardsListPage } from '@connecthing.io/davra-ui'
+</script>
 <template>
-    <div>
-        Dashboards Page place holder
-    </div>
+    <v-container>
+        <DashboardsListPage> </DashboardsListPage>
+    </v-container>
 </template>

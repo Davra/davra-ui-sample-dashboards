@@ -33,9 +33,9 @@
     </v-app-bar>
 
     <v-main class="bg-grey-lighten-2">
-      <v-container>
+     
         <router-view></router-view>
-      </v-container>
+      
     </v-main>
   </v-app>
 </template>
@@ -46,5 +46,12 @@
     { title: 'Dashboards', to:'dashboards'},
 
   ]
-</script>
 
+  import { useDashboardsStore, useUserSessionStore } from '@connecthing.io/davra-ui'
+  import { onMounted } from 'vue';
+    onMounted( () => {
+      useUserSessionStore()
+      const dashbaordsStore = useDashboardsStore()
+      dashbaordsStore.dashboardsPagePath = '/dashboards'
+    })
+</script>

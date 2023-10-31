@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import HellowWorld from './components/HelloWorld.vue'
 import Dashboards from './components/Dashboards.vue'
+import Dashboard from './components/Dashboard.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import { createPinia } from 'pinia'
@@ -10,6 +11,12 @@ import { createPinia } from 'pinia'
 const routes = [
     { name:'home', path: '/', component: HellowWorld },
     { name:'dashboards', path: '/dashboards', component: Dashboards },
+    {        
+        path: '/dashboards/:uuid',
+        name: 'Dashboard',
+        component: Dashboard,
+        props:true
+    }
   ]
 
 
@@ -26,10 +33,9 @@ import * as directives from 'vuetify/directives'
 
  
 const myCustomLightTheme: ThemeDefinition = {
-    dark: true,
+    dark: false,
     colors: {
-      background: '#fffff',
-      surface: '#fffff',
+
       primary: '#8403fc',
       'primary-darken-1': '#3700B3',
       secondary: '#03DAC6',
@@ -40,6 +46,9 @@ const myCustomLightTheme: ThemeDefinition = {
       warning: '#FB8C00',
     },
   }
+import '@connecthing.io/davra-ui/dist-lib/style.css'
+
+import '@mdi/font/css/materialdesignicons.css'
   
 const vuetify =  createVuetify({
     theme: {
@@ -52,6 +61,10 @@ const vuetify =  createVuetify({
     directives,
   })
 
+  import { DavraApiConfig } from '@connecthing.io/davra-ui'
+
+  DavraApiConfig.baseURL = import.meta.env.VITE_PLATFROM_URL
+  DavraApiConfig.auth = { username: import.meta.env.VITE_USERNAME, password:import.meta.env.VITE_PASSWORD}
 
 
 createApp(App).use(vuetify).use(router).use(createPinia()).mount('#app')
