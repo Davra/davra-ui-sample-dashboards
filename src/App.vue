@@ -33,9 +33,7 @@
     </v-app-bar>
 
     <v-main class="bg-grey-lighten-2">
-      <v-container>
         <router-view></router-view>
-      </v-container>
     </v-main>
   </v-app>
 </template>

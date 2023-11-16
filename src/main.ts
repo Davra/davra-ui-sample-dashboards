@@ -26,10 +26,8 @@ import * as directives from 'vuetify/directives'
 
  
 const myCustomLightTheme: ThemeDefinition = {
-    dark: true,
+    dark: false,
     colors: {
-      background: '#fffff',
-      surface: '#fffff',
       primary: '#8403fc',
       'primary-darken-1': '#3700B3',
       secondary: '#03DAC6',
