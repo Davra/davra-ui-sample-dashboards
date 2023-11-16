@@ -46,7 +46,7 @@ const myCustomLightTheme: ThemeDefinition = {
       warning: '#FB8C00',
     },
   }
-import '@connecthing.io/davra-ui/dist-lib/style.css'
+import '@davra/ui-dashboards/dist/style.css'
 
 import '@mdi/font/css/materialdesignicons.css'
   
@@ -61,7 +61,7 @@ const vuetify =  createVuetify({
     directives,
   })
 
-  import { DavraApiConfig } from '@connecthing.io/davra-ui'
+  import { DavraApiConfig } from '@davra/ui-dashboards'
 
   DavraApiConfig.baseURL = import.meta.env.VITE_PLATFROM_URL
   DavraApiConfig.auth = { username: import.meta.env.VITE_USERNAME, password:import.meta.env.VITE_PASSWORD}

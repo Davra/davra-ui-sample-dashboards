@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DashboardPage } from '@connecthing.io/davra-ui'
+import { DashboardPage } from '@davra/ui-dashboards'
 
 const props = defineProps<{ uuid: string }>()
 

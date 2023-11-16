@@ -1,1 +1,0 @@
-declare module  '@connecthing.io/davra-ui';

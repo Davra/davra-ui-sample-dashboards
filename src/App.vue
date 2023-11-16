@@ -44,13 +44,12 @@
   const links = [
     { title: 'Home', to:'home'},
     { title: 'Dashboards', to:'dashboards'},
-
   ]
 
-  import { useDashboardsStore, useUserSessionStore } from '@connecthing.io/davra-ui'
+  import { useDashboardsStore } from '@davra/ui-dashboards'
   import { onMounted } from 'vue';
     onMounted( () => {
-      useUserSessionStore()
+
       const dashbaordsStore = useDashboardsStore()
       dashbaordsStore.dashboardsPagePath = '/dashboards'
     })
