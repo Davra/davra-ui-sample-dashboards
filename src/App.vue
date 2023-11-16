@@ -33,9 +33,9 @@
     </v-app-bar>
 
     <v-main class="bg-grey-lighten-2">
-      <v-container>
+     
         <router-view></router-view>
-      </v-container>
+      
     </v-main>
   </v-app>
 </template>
@@ -44,7 +44,13 @@
   const links = [
     { title: 'Home', to:'home'},
     { title: 'Dashboards', to:'dashboards'},
-
   ]
-</script>
 
+  import { useDashboardsStore } from '@davra/ui-dashboards'
+  import { onMounted } from 'vue';
+    onMounted( () => {
+
+      const dashbaordsStore = useDashboardsStore()
+      dashbaordsStore.dashboardsPagePath = '/dashboards'
+    })
+</script>
