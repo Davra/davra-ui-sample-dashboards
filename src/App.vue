@@ -9,7 +9,7 @@
     <v-navigation-drawer v-model="drawer">
       <v-sheet color="grey-lighten-4" class="pa-4">
         <v-avatar class="mb-4" color="grey-darken-1" size="64">{{ currentUser?.name.slice(0, 1).toUpperCase()
-        }}</v-avatar>
+          }}</v-avatar>
 
         <div>{{ currentUser?.name }}</div>
       </v-sheet>
@@ -21,7 +21,11 @@
     </v-navigation-drawer>
     <v-main>
       <!--  -->
-      <router-view></router-view>
+      <router-view v-if="!isLoading"></router-view>
+
+      <v-overlay :model-value="isLoading" class="align-center justify-center" scrim="grey" opacity="1">
+        <v-progress-circular color="primary" size="64" indeterminate></v-progress-circular>
+      </v-overlay>
     </v-main>
   </v-app>
 </template>
@@ -40,7 +44,9 @@ const drawer = ref(true)
 
 const theme = useTheme()
 const { organisationTheme, currentUser } = storeToRefs(useOrganisationsStore())
+const isLoading = ref(true)
 onMounted(async () => {
+
   await useOrganisationsStore().pullUserOrganisations()
   if (organisationTheme.value) {
     theme.themes.value.lightTheme.colors.primary = organisationTheme.value.primaryColor;
@@ -48,7 +54,7 @@ onMounted(async () => {
 
   const dashbaordsStore = useDashboardsStore()
   dashbaordsStore.dashboardsPagePath = '/dashboards'
-
+  isLoading.value = false
 })
 
 

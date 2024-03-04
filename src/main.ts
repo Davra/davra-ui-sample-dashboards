@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import Dashboards from './components/Dashboards.vue';
 import Dashboard from './components/Dashboard.vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import HomeVue from './components/Home.vue';
 
 import { createPinia } from 'pinia';
@@ -38,14 +38,7 @@ import * as directives from 'vuetify/directives';
 const lightTheme: ThemeDefinition = {
   dark: false,
   colors: {
-    primary: 'grey',
-    'primary-darken-1': '#3700B3',
-    secondary: '#03DAC6',
-    'secondary-darken-1': '#018786',
-    error: '#B00020',
-    info: '#2196F3',
-    success: '#4CAF50',
-    warning: '#FB8C00',
+    primary: '#0277BD',
   },
 };
 
@@ -60,7 +53,6 @@ const vuetify = createVuetify({
   directives,
 });
 
-const base = import.meta.env.VITE_MS_BASE;
 const routes = [
   { name: 'home', path: '/', component: HomeVue },
   { name: 'dashboards', path: '/dashboards/', component: Dashboards },
@@ -74,7 +66,7 @@ const routes = [
 
 const router = createRouter({
   // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
-  history: createWebHistory(base),
+  history: createWebHashHistory(),
   routes, // short for `routes: routes`
 });
 

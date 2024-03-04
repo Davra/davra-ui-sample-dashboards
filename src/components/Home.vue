@@ -7,12 +7,14 @@
                 Welcome your are currently logged in the following organisation : <h1> {{ currentOrg.name }}</h1>
             </div>
         </template>
+
         <template v-else>
             <div>
                 Welcome your are not currently logged in any organisation
             </div>
         </template>
     </v-container>
+
 </template>
 
 <script setup lang="ts">
