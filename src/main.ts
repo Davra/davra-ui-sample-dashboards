@@ -1,70 +1,81 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import HellowWorld from './components/HelloWorld.vue'
-import Dashboards from './components/Dashboards.vue'
-import Dashboard from './components/Dashboard.vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createApp } from 'vue';
+import App from './App.vue';
+import Dashboards from './components/Dashboards.vue';
+import Dashboard from './components/Dashboard.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeVue from './components/Home.vue';
 
-import { createPinia } from 'pinia'
+import { createPinia } from 'pinia';
 
+import '@davra/ui-dashboards/dist/style.css';
 
-const routes = [
-    { name:'home', path: '/', component: HellowWorld },
-    { name:'dashboards', path: '/dashboards', component: Dashboards },
-    {        
-        path: '/dashboards/:uuid',
-        name: 'Dashboard',
-        component: Dashboard,
-        props:true
-    }
-  ]
+import '@mdi/font/css/materialdesignicons.css';
+import { DavraApiConfig } from './services/davraApi';
 
+DavraApiConfig.baseURL = import.meta.env.VITE_PLATFROM_URL;
+if (import.meta.env.VITE_TOKEN) {
+  DavraApiConfig.headers = {
+    Authorization: `bearer ${import.meta.env.VITE_TOKEN}`,
+  };
+}
 
-  const router = createRouter({
-    // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
-    history: createWebHistory(),
-    routes, // short for `routes: routes`
-  })
+import { DavraApiConfig as DashApiConfig } from '@davra/ui-dashboards';
+
+DashApiConfig.baseURL = import.meta.env.VITE_PLATFROM_URL;
+
+if (import.meta.env.VITE_TOKEN) {
+  DashApiConfig.headers = {
+    Authorization: `bearer ${import.meta.env.VITE_TOKEN}`,
+  };
+}
+
 // Vuetify
-import 'vuetify/styles'
-import { createVuetify, ThemeDefinition } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
+import 'vuetify/styles';
+import { createVuetify, ThemeDefinition } from 'vuetify';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
 
- 
-const myCustomLightTheme: ThemeDefinition = {
-    dark: false,
-    colors: {
+const lightTheme: ThemeDefinition = {
+  dark: false,
+  colors: {
+    primary: 'grey',
+    'primary-darken-1': '#3700B3',
+    secondary: '#03DAC6',
+    'secondary-darken-1': '#018786',
+    error: '#B00020',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FB8C00',
+  },
+};
 
-      primary: '#8403fc',
-      'primary-darken-1': '#3700B3',
-      secondary: '#03DAC6',
-      'secondary-darken-1': '#018786',
-      error: '#B00020',
-      info: '#2196F3',
-      success: '#4CAF50',
-      warning: '#FB8C00',
+const vuetify = createVuetify({
+  theme: {
+    defaultTheme: 'lightTheme',
+    themes: {
+      lightTheme,
     },
-  }
-import '@davra/ui-dashboards/dist/style.css'
+  },
+  components,
+  directives,
+});
 
-import '@mdi/font/css/materialdesignicons.css'
-  
-const vuetify =  createVuetify({
-    theme: {
-      defaultTheme: 'myCustomLightTheme',
-      themes: {
-        myCustomLightTheme,
-      },
-    },
-    components,
-    directives,
-  })
+const base = import.meta.env.VITE_MS_BASE;
+const routes = [
+  { name: 'home', path: '/', component: HomeVue },
+  { name: 'dashboards', path: '/dashboards/', component: Dashboards },
+  {
+    path: '/dashboards/:uuid',
+    name: 'Dashboard',
+    component: Dashboard,
+    props: true,
+  },
+];
 
-  import { DavraApiConfig } from '@davra/ui-dashboards'
+const router = createRouter({
+  // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
+  history: createWebHistory(base),
+  routes, // short for `routes: routes`
+});
 
-  DavraApiConfig.baseURL = import.meta.env.VITE_PLATFROM_URL
-  DavraApiConfig.auth = { username: import.meta.env.VITE_USERNAME, password:import.meta.env.VITE_PASSWORD}
-
-
-createApp(App).use(vuetify).use(router).use(createPinia()).mount('#app')
+createApp(App).use(vuetify).use(router).use(createPinia()).mount('#app');
