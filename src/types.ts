@@ -7,3 +7,13 @@ export interface Organisation {
   customAttributes?: any;
   tenantId: string;
 }
+
+export interface Metric {
+  _id?: string
+  name: string
+  description?: string
+  label: string
+  units?: string
+  labels?: { [key: string]: string }
+  semantics?: string
+}

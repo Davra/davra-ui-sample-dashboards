@@ -1,21 +1,24 @@
 <template>
   <v-app>
     <v-app-bar color="primary">
-
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-app-bar-title>Davra Custom App Starter</v-app-bar-title>
+      <v-img :src="organisationTheme?.logoUrl || '/1801.jpeg'" style="max-width:100px;"></v-img>
+      <v-app-bar-title>{{ companyName }} Custom App Starter</v-app-bar-title>
       <OrgSelector></OrgSelector>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer">
-      <v-sheet color="grey-lighten-4" class="pa-4">
+      <!-- <v-sheet color="grey-lighten-4" class="pa-4">
         <v-avatar class="mb-4" color="grey-darken-1" size="64">{{ currentUser?.name.slice(0, 1).toUpperCase()
           }}</v-avatar>
 
-        <div>{{ currentUser?.name }}</div>
-      </v-sheet>
+        <div>Logged as {{ currentUser?.name }}</div>
+      </v-sheet> -->
       <v-list>
         <v-list-item title="Home" :to="{ name: 'home' }"></v-list-item>
         <v-list-item title="Dashboards" :to="{ name: 'dashboards' }"></v-list-item>
+        <v-list-item title="Devices" :to="{ name: 'devices' }"></v-list-item>
+        <v-list-item title="Twins" :to="{ name: 'twins' }"></v-list-item>
+        <v-list-item title="Metrics" :to="{ name: 'metrics' }"></v-list-item>
       </v-list>
       <!--  -->
     </v-navigation-drawer>
@@ -40,10 +43,10 @@ import { useTheme } from 'vuetify';
 import { storeToRefs } from 'pinia';
 import { useDashboardsStore } from '@davra/ui-dashboards';
 
+const companyName = import.meta.env.VITE_COMPANY_NAME || 'Demo'
 const drawer = ref(true)
-
 const theme = useTheme()
-const { organisationTheme, currentUser } = storeToRefs(useOrganisationsStore())
+const { organisationTheme } = storeToRefs(useOrganisationsStore())
 const isLoading = ref(true)
 onMounted(async () => {
 
@@ -54,6 +57,7 @@ onMounted(async () => {
 
   const dashbaordsStore = useDashboardsStore()
   dashbaordsStore.dashboardsPagePath = '/dashboards'
+
   isLoading.value = false
 })
 
